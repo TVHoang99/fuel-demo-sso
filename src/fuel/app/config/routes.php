@@ -10,9 +10,20 @@
  * @link       https://fuelphp.com
  */
 
-return array(
-    '_root_'  => 'home/index',
-    'admin'   => 'admin/index',
-    'auth/login' => 'auth/login',
-    'auth/validate' => 'auth/validate',
-);
+$host = \Input::server('HTTP_HOST');
+
+if (strpos($host, 'admin.ssodemo.local') !== false) {
+    // Routes cho admin domain
+    return array(
+        '_root_'  => 'admin/index',
+        'auth/login' => 'auth/login',
+        'auth/validate' => 'auth/validate',
+    );
+} else {
+    // Routes cho domain chính
+    return array(
+        '_root_'  => 'home/index',
+        'auth/login' => 'auth/login',
+        'auth/validate' => 'auth/validate',
+    );
+}
